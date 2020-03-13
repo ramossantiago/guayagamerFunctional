@@ -32,7 +32,7 @@ import net.technisys.guayagamer.model.LunchSession;
 import net.technisys.guayagamer.model.RegularSession;
 import net.technisys.guayagamer.model.ReviewSession;
 
-public class Main implements NuevaInterface {
+public class Main {
 
 	private static List<Conference> inputConferences = new ArrayList<>();
 	private static LinkedList<Conference> freeConferencesQueue = new LinkedList<>();
@@ -207,13 +207,16 @@ public class Main implements NuevaInterface {
 		boolean sucessChanged = false;
 
 		// QUITAR UNA QUE TENGA LA DURACION FALTANTE
-		for (Conference conf : session.getConferences()) {
-			if (conf.getDurationInMinutes().equals(neededTimeForFix)) {
-				deleteConference = conf;
-				sucessChanged = true;
-				break;
-			}
+		Optional<Conference> changeConference = session.getConferences().stream()
+			.filter(conf -> conf.getDurationInMinutes().equals(neededTimeForFix))
+			.findFirst();
+		
+		if (changeConference.isPresent()){
+			deleteConference = changeConference.get();
+			sucessChanged = true;
 		}
+		
+	
 
 		// QUITAR UNA QUE SU DURACION + LO FALTANTE SEA IGUAL A LA DURACION QUE NECESITO
 		// UBICAR

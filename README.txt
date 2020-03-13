@@ -8,3 +8,6 @@ Para ejecutar el programa se debe usar el comando java -jar meetings.jar <ruta y
 El archivo de entrada puede ser similar al archivo entradaConferencias.txt adjunto en este proyecto.
 
 Ej java -jar meetings.jar c:\santiago\entradaConferencias.txt
+
+
+Refactorizado con expresiones lambda y programacion funcional
